@@ -8,22 +8,29 @@ services:
             args:
                 base_image: ${NC_BASE_IMAGE}
         image: ${NC_BASE_IMAGE}-qemu
+        command: "echo 'base image'"
+        labels:
+        - "traefik.enable=false"
     mysql:
         image: ${MYSQL_IMAGE}
+        restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
-            - mysql_data:/var/lib/mysql
-    nextcloud-docker-pi:
+            - ${MYSQL_DATA}:/var/lib/mysql
+        labels:
+        - "traefik.enable=false"
+    nextcloud-rpi:
         build:
             context: ./14.0/apache
             dockerfile: Dockerfile
             args:
                 base_image: ${NC_BASE_IMAGE}-qemu
         image: ${IMAGE_NAME}
+        restart: unless-stopped
         depends_on:
             - nc-base-image-with-qemu
             - mysql
@@ -34,11 +41,10 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
-            - nc_data:/var/www/html/data
-        ports:
-        - "80:80"
-        - "443:443"
-        - "4443:4443"
+            - ${NC_DATA}:/var/www/html/data
+        labels:
+        - "traefik.enable=true"
+        - "traefik.frontend.rule=PathPrefixStrip:/nextcloud;"
 
 volumes:
     nc_data:
