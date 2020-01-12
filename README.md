@@ -23,3 +23,17 @@ download-qemu-static.sh
 ```bash
 docker-compose build
 ```
+
+## Installation
+
+### First time install
+
+```bash
+./nc-first-install.sh
+```
+
+### Set Prefix (optional)
+
+```bash
+./run-occ.sh config:system:set overwritewebroot --value /nextcloud
+```

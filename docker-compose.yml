@@ -13,7 +13,7 @@ services:
         - "traefik.enable=false"
     mysql:
         image: ${MYSQL_IMAGE}
-        restart: unless-stopped
+        restart: on-failure
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -30,7 +30,7 @@ services:
             args:
                 base_image: ${NC_BASE_IMAGE}-qemu
         image: ${IMAGE_NAME}
-        restart: unless-stopped
+        restart: on-failure
         depends_on:
             - nc-base-image-with-qemu
             - mysql
@@ -41,6 +41,7 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
+            - ${NC_HTML_DATA}:/var/www/html
             - ${NC_DATA}:/var/www/html/data
         labels:
         - "traefik.enable=true"
