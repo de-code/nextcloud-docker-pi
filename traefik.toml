@@ -1,0 +1,4 @@
+[frontends]
+  [frontends.frontend-nextcloud-docker-pi-nextcloud-docker-pi]
+  backend = "backend-nextcloud-docker-pi-nextcloud-docker-pi"
+  rule = "Host:localhost;PathPrefixStrip:/nextcloud"
