@@ -11,6 +11,9 @@ CURRENT_BACKUP_DIR="$BACKUP_DIR/$CURRENT_DATE_STR"
 CURRENT_MYSQL_BACKUP_FILE="$CURRENT_BACKUP_DIR/nextcloud-mysql-backup.sql"
 
 
+mkdir -p "$CURRENT_BACKUP_DIR"
+
+
 docker-compose exec mysql \
     mysqldump --single-transaction -h localhost \
     --user="$MYSQL_USER" \
