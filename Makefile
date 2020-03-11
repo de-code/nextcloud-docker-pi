@@ -11,6 +11,18 @@ export $(shell sed 's/=.*//' .env)
 	mkdir -p "$(BACKUP_DIR)"
 
 
+nc-clone-docker:
+	git clone https://github.com/nextcloud/docker .temp/nextcloud-docker
+	cd .temp/nextcloud-docker && git pull
+
+
+nc-prepare-docker-config:
+	mkdir -p "$(NC_VERSION)/apache"
+	cp -R .temp/nextcloud-docker/$(NC_VERSION)/apache/* "$(NC_VERSION)/apache"
+	sed -i -r 's/FROM (.*)/ARG base_image=\1\nFROM $${base_image}/g' "$(NC_VERSION)/apache/Dockerfile"
+	head -5 "$(NC_VERSION)/apache/Dockerfile"
+
+
 download-qemu-static:
 	./download-qemu-static.sh
 
