@@ -25,7 +25,7 @@ services:
         - "traefik.enable=false"
     nextcloud-rpi:
         build:
-            context: ./14.0/apache
+            context: ./${NC_VERSION}/apache
             dockerfile: Dockerfile
             args:
                 base_image: ${NC_BASE_IMAGE}-qemu
