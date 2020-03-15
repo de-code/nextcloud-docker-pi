@@ -37,6 +37,10 @@ build:
 	docker-compose build
 
 
+nc-stop:
+	docker-compose stop nextcloud-rpi
+
+
 nc-start:
 	docker-compose up -d nextcloud-rpi
 
@@ -45,7 +49,7 @@ nc-logs:
 	docker-compose logs -f nextcloud-rpi
 
 
-nc-first-install:
+nc-first-install: nc-start
 	./nc-first-install.sh
 
 
