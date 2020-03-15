@@ -30,8 +30,6 @@ services:
         labels:
             - "traefik.enable=true"
             - "traefik.frontend.rule=PathPrefixStrip:/nextcloud;"
-        ports:
-            - "8081:80"     # The HTTP port
 
 volumes:
     nc_data:
