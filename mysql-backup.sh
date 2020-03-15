@@ -5,7 +5,7 @@ set -e
 source ./load-env.sh
 
 
-CURRENT_DATE_STR="`date +%F`"
+CURRENT_DATE_STR="`date +%Y-%m-%d_%H-%M`"
 CURRENT_BACKUP_DIR="$BACKUP_DIR/$CURRENT_DATE_STR-mysql"
 
 CURRENT_MYSQL_BACKUP_FILE="$CURRENT_BACKUP_DIR/nextcloud-mysql-backup.sql"

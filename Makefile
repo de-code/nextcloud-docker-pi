@@ -3,7 +3,7 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 
-CURRENT_DATE_STR = $(shell date +%F)
+CURRENT_DATE_STR = $(shell date +%Y-%m-%d_%H-%M)
 CURRENT_BACKUP_DIR_PREFIX = $(BACKUP_DIR)/$(CURRENT_DATE_STR)
 
 
