@@ -53,6 +53,10 @@ nc-set-prefix:
 	./run-occ.sh config:system:set overwritewebroot --value /nextcloud
 
 
+nc-docker-push:
+	docker push ${IMAGE_NAME}:${IMAGE_TAG}
+
+
 mysql-start:
 	docker-compose up -d mysql
 
