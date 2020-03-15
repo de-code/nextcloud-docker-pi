@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    nc-base-image-with-qemu:
+        build:
+            context: .
+            dockerfile: Dockerfile.qemu
+            args:
+                base_image: ${NC_BASE_IMAGE}
+        image: ${NC_BASE_IMAGE}-qemu
+        command: "echo 'base image'"
+        labels:
+            - "traefik.enable=false"
+    nextcloud-rpi:
+        build:
+            context: ./${NC_VERSION}/apache
+            dockerfile: Dockerfile
+            args:
+                base_image: ${NC_BASE_IMAGE}-qemu
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        depends_on:
+            - nc-base-image-with-qemu

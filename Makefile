@@ -34,7 +34,7 @@ register-qemu-static:
 
 
 build:
-	docker-compose build
+	docker-compose -f docker-compose.build.yml -f docker-compose.yml build
 
 
 nc-stop:
