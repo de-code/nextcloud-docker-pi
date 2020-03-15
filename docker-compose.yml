@@ -10,7 +10,7 @@ services:
         image: ${NC_BASE_IMAGE}-qemu
         command: "echo 'base image'"
         labels:
-        - "traefik.enable=false"
+            - "traefik.enable=false"
     mysql:
         image: ${MYSQL_IMAGE}
         restart: on-failure
@@ -22,7 +22,7 @@ services:
         volumes:
             - ${MYSQL_DATA}:/var/lib/mysql
         labels:
-        - "traefik.enable=false"
+            - "traefik.enable=false"
     nextcloud-rpi:
         build:
             context: ./${NC_VERSION}/apache
@@ -44,8 +44,8 @@ services:
             - ${NC_HTML_DATA}:/var/www/html
             - ${NC_DATA}:/var/www/html/data
         labels:
-        - "traefik.enable=true"
-        - "traefik.frontend.rule=PathPrefixStrip:/nextcloud;"
+            - "traefik.enable=true"
+            - "traefik.frontend.rule=PathPrefixStrip:/nextcloud;"
 
 volumes:
     nc_data:
