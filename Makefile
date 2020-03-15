@@ -41,6 +41,17 @@ build:
 	docker-compose -f docker-compose.build.yml -f docker-compose.yml build
 
 
+stop:
+	docker-compose down
+
+
+start: nc-start
+
+
+logs:
+	docker-compose logs -f
+
+
 nc-stop:
 	docker-compose stop nextcloud-rpi
 
