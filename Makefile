@@ -75,6 +75,10 @@ nc-html-backup:
 	sudo cp -r --preserve "$(NC_HTML_DATA)" "$(CURRENT_BACKUP_DIR_PREFIX)-nc-html"
 
 
+mysql-stop:
+	docker-compose stop mysql
+
+
 mysql-start:
 	docker-compose up -d mysql
 
