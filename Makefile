@@ -12,8 +12,10 @@ export $(shell sed 's/=.*//' .env)
 
 
 nc-clone-docker:
-	git clone https://github.com/nextcloud/docker .temp/nextcloud-docker
-	cd .temp/nextcloud-docker && git pull
+	@if [ ! -d ".temp/nextcloud-docker" ]; then \
+		git clone "$(NC_GIT_REPO)" .temp/nextcloud-docker; \
+	fi
+	cd .temp/nextcloud-docker && git checkout "$(NC_GIT_TAG)" && git pull
 
 
 nc-prepare-docker-config:
