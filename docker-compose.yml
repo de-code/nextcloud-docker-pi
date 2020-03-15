@@ -10,7 +10,7 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
-            - ${MYSQL_DATA}:/var/lib/mysql
+            - ${MYSQL_DATA}:${MYSQL_CONTAINER_DATA_DIR}
         labels:
             - "traefik.enable=false"
     nextcloud-rpi:
