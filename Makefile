@@ -41,8 +41,7 @@ build:
 	docker-compose -f docker-compose.build.yml -f docker-compose.yml build
 
 
-stop:
-	docker-compose down
+stop: nc-stop mysql-stop
 
 
 start: nc-start
@@ -100,6 +99,10 @@ mysql-start:
 
 mysql-logs:
 	docker-compose logs -f mysql
+
+
+mysql-exec:
+	./mysql-exec.sh
 
 
 mysql-backup: .require-BACKUP_DIR
