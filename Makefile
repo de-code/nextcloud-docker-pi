@@ -52,6 +52,10 @@ logs:
 	docker-compose logs -f
 
 
+pull:
+	docker-compose pull
+
+
 nc-stop:
 	docker-compose stop nextcloud-rpi
 
