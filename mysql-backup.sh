@@ -16,8 +16,8 @@ mkdir -p "$CURRENT_BACKUP_DIR"
 
 docker-compose exec mysql \
     mysqldump --single-transaction -h localhost \
-    --user="$MYSQL_USER" \
-    --password="$MYSQL_PASSWORD" \
+    --user="root" \
+    --password="$MYSQL_ROOT_PASSWORD" \
     --port=3306 \
     --databases \
     "$MYSQL_DATABASE" \
