@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
     nc-base-image-with-qemu:
@@ -17,6 +17,9 @@ services:
             dockerfile: Dockerfile
             args:
                 base_image: ${NC_BASE_IMAGE}-qemu
+            labels:
+                org.opencontainers.image.source: https://github.com/de-code/nextcloud-docker-pi
+                org.opencontainers.image.documentation: https://github.com/de-code/nextcloud-docker-pi/README.md
         image: ${IMAGE_NAME}:${IMAGE_TAG}
         depends_on:
             - nc-base-image-with-qemu
