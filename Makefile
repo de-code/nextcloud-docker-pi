@@ -3,6 +3,10 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 
+CURRENT_DATE_STR = $(shell date +%F)
+CURRENT_BACKUP_DIR_PREFIX = $(BACKUP_DIR)/$(CURRENT_DATE_STR)
+
+
 .require-BACKUP_DIR:
 	@if [ -z "$(BACKUP_DIR)" ]; then \
 		echo "BACKUP_DIR is required"; \
@@ -61,6 +65,16 @@ nc-docker-push:
 	docker push ${IMAGE_NAME}:${IMAGE_TAG}
 
 
+nc-data-backup:
+	sudo rm -rf "$(CURRENT_BACKUP_DIR_PREFIX)-nc-data"
+	sudo cp -r --preserve "$(NC_DATA)" "$(CURRENT_BACKUP_DIR_PREFIX)-nc-data"
+
+
+nc-html-backup:
+	sudo rm -rf "$(CURRENT_BACKUP_DIR_PREFIX)-nc-html"
+	sudo cp -r --preserve "$(NC_HTML_DATA)" "$(CURRENT_BACKUP_DIR_PREFIX)-nc-html"
+
+
 mysql-start:
 	docker-compose up -d mysql
 
@@ -71,3 +85,4 @@ mysql-logs:
 
 mysql-backup: .require-BACKUP_DIR
 	./mysql-backup.sh
+
