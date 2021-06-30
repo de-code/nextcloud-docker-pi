@@ -14,7 +14,7 @@ CURRENT_MYSQL_BACKUP_FILE="$CURRENT_BACKUP_DIR/nextcloud-mysql-backup.sql"
 mkdir -p "$CURRENT_BACKUP_DIR"
 
 
-docker-compose exec mysql \
+docker-compose exec -T mysql \
     mysqldump --single-transaction -h localhost \
     --user="root" \
     --password="$MYSQL_ROOT_PASSWORD" \
@@ -23,4 +23,5 @@ docker-compose exec mysql \
     "$MYSQL_DATABASE" \
     | tee "$CURRENT_MYSQL_BACKUP_FILE"
 
-echo "saved to: $CURRENT_MYSQL_BACKUP_FILE"
+gzip "$CURRENT_MYSQL_BACKUP_FILE"
+echo "saved to: $CURRENT_MYSQL_BACKUP_FILE.gz"
