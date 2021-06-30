@@ -1,6 +1,6 @@
 #!make
 include .env
-export $(shell sed 's/=.*//' .env)
+export $(shell sed 's/=".*//"' .env)
 
 
 CURRENT_DATE_STR = $(shell date +%Y-%m-%d_%H-%M)
